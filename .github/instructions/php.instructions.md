@@ -4,7 +4,7 @@
 Use these rules for all PHP in this Drupal 10 and above repository. Follow Drupal Coding Standards, keep code testable, and prefer core APIs.
 
 ## Language and Runtime
-- PHP: 8.3
+- PHP: 8.4
 - Drupal Core: 10.x and above
 
 ## File Structure and Declarations
@@ -42,6 +42,17 @@ Use these rules for all PHP in this Drupal 10 and above repository. Follow Drupa
 - Use the Database API with injected `@database` service.
 - Avoid raw SQL; if unavoidable, document and parameterize.
 - Use Config API for configuration and State API only for runtime values.
+- Provide config schemas in `config/schema` when adding configuration.
+
+## Hooks, Events, and Plugins
+- Prefer plugins when extending Drupal behavior (field types, blocks, views, etc.).
+- Use hooks for integration points when a plugin is not available.
+- Keep hook implementations thin; delegate to services.
+
+## Caching and Performance
+- Add cache metadata to render arrays, not Twig.
+- Use appropriate cache tags, contexts, and max-age for dynamic content.
+- Avoid heavy work in the request lifecycle; use queues or cron for batch tasks.
 
 ## Testing
 - Use PHPUnit. Add unit and kernel tests for service logic.
