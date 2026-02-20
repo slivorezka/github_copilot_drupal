@@ -5,7 +5,7 @@ Use this file for all Drupal 10 and above contributions in this repository. Foll
 
 ## Platform
 - Drupal Core: 10.x and above
-- PHP: 8.3
+- PHP: 8.4
 
 ## Coding Standards
 - Follow Drupal Coding Standards and the repository `phpcs.xml` rules.
@@ -20,7 +20,9 @@ Use this file for all Drupal 10 and above contributions in this repository. Foll
 - Define services in `*.services.yml` and inject them via constructors.
 - Business logic belongs in services; controllers should only orchestrate requests and responses.
 - Prefer core APIs: Entity API, Form API, Database API, Config API, Cache API, and Logger API.
-- Keep custom code in modules/themes; do not modify Drupal core.
+
+## Composer and Dependencies
+- Do not edit `vendor/` directly.
 
 ## Routing, Controllers, and Forms
 - Use routing YAML with `_permission` or `_access` for access control.
@@ -33,6 +35,12 @@ Use this file for all Drupal 10 and above contributions in this repository. Foll
 - Use State API only for runtime or environment-specific values.
 - Provide default configuration in `config/install` when needed.
 - Use `config/schema` to define configuration schemas.
+- Prefer configuration synchronization for deployable changes.
+
+## Hooks, Events, and Plugins
+- Prefer plugins when extending Drupal behavior (field types, blocks, views, etc.).
+- Use hooks for integration points when a plugin is not available.
+- Keep hook implementations thin; delegate to services.
 
 ## Database and Migrations
 - Use Database API with injected `@database` service.
@@ -41,6 +49,7 @@ Use this file for all Drupal 10 and above contributions in this repository. Foll
 
 ## Caching and Performance
 - Use Cache API with appropriate cache tags, contexts, and max-age.
+- Add cache metadata to render arrays, not Twig.
 - Invalidate cache via tags when content changes.
 - Avoid heavy work in request lifecycle; consider queues or cron for batch tasks.
 
@@ -49,13 +58,7 @@ Use this file for all Drupal 10 and above contributions in this repository. Foll
 - Use Twig auto-escaping and Drupal render API for output.
 - Enforce permissions via routing and `$currentUser->hasPermission()`.
 - Avoid rendering user input without proper filtering.
-
-## Frontend
-- Use Twig templates with minimal logic; prepare variables in preprocess functions.
-- Attach assets via `{{ attach_library('module/library') }}`.
-- JavaScript must use Drupal Behaviors and avoid global namespace pollution.
-- Define CSS/JS assets in `*.libraries.yml` and keep styles component-based (BEM).
-- Keep theme-specific templates and assets in themes; keep module templates minimal and functional.
+- Use `#allowed_tags` and text formats where appropriate.
 
 ## Logging and Errors
 - Use injected logger services and meaningful channel names.
@@ -65,7 +68,6 @@ Use this file for all Drupal 10 and above contributions in this repository. Foll
 - Use PHPUnit. Place tests in `tests/src/` for the module.
 - Add unit and kernel tests for service logic.
 - Prefer testable, injected dependencies over static calls.
-- Consider PHPStan for static analysis using `drupal/core/phpstan.neon.dist` as a baseline.
 
 ## Documentation
 - Update `README.md` or module docs when adding features or configuration steps.
