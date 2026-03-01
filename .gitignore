@@ -1,0 +1,5 @@
+# Drupal core — managed via Composer, not committed
+drupal/
+
+# Claude Code worktree tooling
+.claude/
