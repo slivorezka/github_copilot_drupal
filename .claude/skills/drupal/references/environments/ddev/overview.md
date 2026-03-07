@@ -1,0 +1,4 @@
+- **Development Environment**: DDEV (Docker-based development environment)
+- **Environment**: PHP 8.1+, MySQL/MariaDB, Nginx (all managed by DDEV)
+- **Development Tools**: Composer, Drush 12+, Git, DDEV CLI
+- **Important**: All DDEV commands should be run from project root. Use `ddev exec` for Drupal-specific commands.
